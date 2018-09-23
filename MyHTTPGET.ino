@@ -8,17 +8,20 @@ String  serialbuff;
 ESP8266WiFiMulti WiFiMulti;
 void setup() {
   Serial.begin(115200);
+  while(!Serial){;};
   WiFi.mode(WIFI_STA);
   WiFiMulti.addAP("mi6x", "qiuyuhan");
 }
 void loop() {
   // wait for WiFi connection
-  printf("wait for wifi.");
+  Serial.print("wait for wifi.");
   while(WiFiMulti.run()!=WL_CONNECTED)
   {
     Serial.write(".");
     delay(1000);
   }
+  Serial.println();
+  Serial.println("wifi connection is ok!");
   //-------------------------------------------
   Serial.println("wait for serial.");
   while(!Serial.available())
